@@ -7,6 +7,7 @@ import java.nio.file.Paths
 import java.util.ArrayList
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap
 import org.apache.commons.collections4.MultiValuedMap
+import org.jsoup.Jsoup
 import java.io.BufferedReader
 
 
@@ -16,9 +17,8 @@ import java.io.BufferedReader
 // include that in the Data package.
 
 fun main(args : Array<String>) {
-    val players = readPlayersFromCSV()
-    players.forEach{ it.forEach { print("$it | ")}
-                    println()}
+    val playerYearPairs = readPlayersFromCSV()
+    playerYearPairs.forEach{ getAge(it[1]!!, it[0]!!.toInt())}
 
 }
 
@@ -66,4 +66,17 @@ fun readPlayersFromCSV(): ArrayList<Array<String?>> {
     csvReader.close()
 
     return playerPairs
+}
+
+fun getAge(playerStub : String, year : Int) : Int {
+    val webPage = "https://www.atptour.com$playerStub"
+    val html = Jsoup.connect(webPage).get().html()
+    val document = Jsoup.parse(html)
+
+    val elements = document.select(".table-birthday")
+    var dateOfBirth = elements[0].ownText()
+    var date = dateOfBirth.subSequence(1,5).toString().toInt()
+    println("ATP Year: $year || Age: ${year - date}")
+
+    return 1
 }
