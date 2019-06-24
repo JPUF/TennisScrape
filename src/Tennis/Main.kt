@@ -17,8 +17,19 @@ import java.io.BufferedReader
 // include that in the Data package.
 
 fun main(args : Array<String>) {
+
+    val yearTotalAge : HashMap<Int, Int> = HashMap()
+    for(year in 1973..2017){
+        yearTotalAge.put(year, 0)
+    }
+
     val playerYearPairs = readPlayersFromCSV()
-    playerYearPairs.forEach{ getAge(it[1]!!, it[0]!!.toInt())}
+    playerYearPairs.forEach{
+        val currentTotal = yearTotalAge.get(it[0]!!.toInt())
+        yearTotalAge.put(it[0]!!.toInt(), getAge(it[1]!!, it[0]!!.toInt()))
+    }
+//need to increment the existing total each time.
+
 
 }
 
@@ -78,5 +89,5 @@ fun getAge(playerStub : String, year : Int) : Int {
     var date = dateOfBirth.subSequence(1,5).toString().toInt()
     println("ATP Year: $year || Age: ${year - date}")
 
-    return 1
+    return year - date
 }
