@@ -8,5 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="com.opencsv:opencsv:4.6" level="project" />
+    <orderEntry type="library" name="org.apache.commons:commons-collections4:4.0" level="project" />
+    <orderEntry type="library" name="org.jsoup:jsoup:1.12.1" level="project" />
   </component>
 </module>
