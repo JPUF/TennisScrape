@@ -29,3 +29,5 @@ hs_err_pid*
 .idea/workspace.xml
 out/
 src/Tennis/Data/
+/src/Data/rankings_1973-2017_csv.csv
+src/Data/

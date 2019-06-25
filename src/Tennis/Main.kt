@@ -25,16 +25,26 @@ fun main(args : Array<String>) {
 
     val playerYearPairs = readPlayersFromCSV()
     playerYearPairs.forEach{
-        val currentTotal = yearTotalAge.get(it[0]!!.toInt())
-        yearTotalAge.put(it[0]!!.toInt(), getAge(it[1]!!, it[0]!!.toInt()))
+        val total = yearTotalAge.get(it[0]!!.toInt())
+        val playerAge = getAge(it[1]!!, it[0]!!.toInt())
+        yearTotalAge.put(it[0]!!.toInt(), total!! + playerAge)
     }
+    //yearTotalAge.forEach { key, value -> println("$key | $value") }
+
+    val yearAvgAge : HashMap<Int, Double> = HashMap()
+
+    yearTotalAge.forEach{yearAvgAge.put(it.key, it.value / 50.0)}
+    yearAvgAge.toSortedMap()
+    yearAvgAge.forEach{ key, value -> println("$key | $value")}
+
+
 //need to increment the existing total each time.
 
 
 }
 
 fun readPlayersFromCSV(): ArrayList<Array<String?>> {
-    val path = Paths.get("C:\\Users\\psyjb12.AD.000\\IdeaProjects\\TennisScrape\\src\\Tennis\\Data\\rankings_1973-2017_csv.csv")
+    val path = Paths.get("src\\Data\\rankings_1973-2017_csv.csv")
     val reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)
     val csvReader = CSVReader(reader)
     var line = csvReader.readNext()
