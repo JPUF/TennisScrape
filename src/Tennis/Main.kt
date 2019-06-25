@@ -35,7 +35,7 @@ fun main(args : Array<String>) {
 
     yearTotalAge.forEach{yearAvgAge.put(it.key, it.value / 50.0)}
     yearAvgAge.toSortedMap()
-    yearAvgAge.forEach{ key, value -> println("$key | $value")}
+    yearAvgAge.forEach{ key, value -> println("$key,$value,")}
 
 
 //need to increment the existing total each time.
